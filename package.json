@@ -9,7 +9,8 @@
     "chalk": "^4.1.1",
     "discord.js": "^12.5.3",
     "dotenv": "^10.0.0",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+    "utf-8-validate": "^5.0.5"
   },
   "optionalDependencies": {
     "erlpack": "github:discord/erlpack",
