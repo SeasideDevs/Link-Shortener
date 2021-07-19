@@ -1,13 +1,17 @@
 {
   "name": "link-shortener",
   "description": "Link Shortener is a Discord bot to easily shorten links!",
+  "scripts": {
+    "start": "node -r dotenv/config dist/index.js"
+  },
   "dependencies": {
     "chalk": "^4.1.1",
     "discord.js": "^12.5.3",
     "dotenv": "^10.0.0",
     "node-fetch": "^2.6.1"
   },
-  "scripts": {
-    "start": "node -r dotenv/config dist/index.js"
+  "optionalDependencies": {
+    "erlpack": "github:discord/erlpack",
+    "zlib-sync": "^0.1.7"
   }
 }
