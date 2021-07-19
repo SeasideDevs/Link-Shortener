@@ -2,6 +2,8 @@
   "name": "link-shortener",
   "description": "Link Shortener is a Discord bot to easily shorten links!",
   "scripts": {
+    "install:develop": "npm i --production=false",
+    "install:production": "npm i --production",
     "start": "node -r dotenv/config dist/index.js"
   },
   "dependencies": {
@@ -11,6 +13,15 @@
     "dotenv": "^10.0.0",
     "node-fetch": "^2.6.1",
     "utf-8-validate": "^5.0.5"
+  },
+  "devDependencies": {
+    "@types/node": "^16.3.3",
+    "husky": "^7.0.1",
+    "jest": "^27.0.6",
+    "lint-staged": "^11.0.1",
+    "prettier": "^2.3.2",
+    "tsc-watch": "^4.4.0",
+    "typescript": "^4.3.5"
   },
   "optionalDependencies": {
     "erlpack": "github:discord/erlpack",
