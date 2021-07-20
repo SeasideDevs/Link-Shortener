@@ -17,8 +17,9 @@ const bot = new Discord.Client({
   },
 });
 
-const commandFiles = readdirSync("./commands");
-const commands = new Discord.Collection();
+// const commandFiles = readdirSync("./commands");
+// console.log(commandFiles)
+// const commands = new Discord.Collection();
 
 bot.on("ready", async () => {
   log(`Logged in as ${bot.user!.tag}`, "SUCCESS");

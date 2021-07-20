@@ -140,7 +140,6 @@ var __importDefault =
 Object.defineProperty(exports, "__esModule", { value: true });
 var discord_js_1 = __importDefault(require("discord.js"));
 var logger_1 = require("./functions/logger");
-var fs_1 = require("fs");
 var bot = new discord_js_1.default.Client({
   disableMentions: "all",
   allowedMentions: {
@@ -156,8 +155,9 @@ var bot = new discord_js_1.default.Client({
     intents: ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES"],
   },
 });
-var commandFiles = fs_1.readdirSync("./commands");
-var commands = new discord_js_1.default.Collection();
+// const commandFiles = readdirSync("./commands");
+// console.log(commandFiles)
+// const commands = new Discord.Collection();
 bot.on("ready", function () {
   return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
