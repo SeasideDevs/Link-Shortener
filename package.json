@@ -2,6 +2,9 @@
   "name": "link-shortener",
   "description": "Link Shortener is a Discord bot to easily shorten links!",
   "scripts": {
+    "scripts:watch": "tsc --watch",
+    "scripts:build": "tsc",
+    "install:husky": "husky install",
     "install:develop": "npm i --production=false",
     "install:production": "npm i --production",
     "start": "node -r dotenv/config dist/index.js"
