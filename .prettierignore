@@ -1,2 +1,4 @@
-./dist
+.dist
+.husky
+.prettierignore
 tsconfig.json
