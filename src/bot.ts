@@ -36,3 +36,5 @@ bot.on("guildDelete", async (guild) => {
 bot.on("message", async (msg) => {
   if (msg.author.bot) return;
 });
+
+bot.login();
