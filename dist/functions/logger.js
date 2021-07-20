@@ -8,12 +8,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.log = void 0;
 var chalk_1 = __importDefault(require("chalk"));
 function log(msg, type) {
-  if (!msg) {
-    return new TypeError("No message provided.");
-  }
-  if (!type) {
-    return new TypeError("No type provided.");
-  }
   var loggers = [
     {
       name: "info",
