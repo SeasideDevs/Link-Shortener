@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var discord_js_1 = require("discord.js");
 var logger_1 = require("./functions/logger");
-var manager = new discord_js_1.ShardingManager("bot.js", {
+var manager = new discord_js_1.ShardingManager(__dirname + "/bot.js", {
   token: process.env.BOT_TOKEN,
 });
 manager.on("shardCreate", function (shard) {

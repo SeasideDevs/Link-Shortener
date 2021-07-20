@@ -1,6 +1,6 @@
 import { ShardingManager } from "discord.js";
 import { log } from "./functions/logger";
-const manager = new ShardingManager("bot.js", {
+const manager = new ShardingManager(__dirname + "/bot.js", {
   token: process.env.BOT_TOKEN,
 });
 
