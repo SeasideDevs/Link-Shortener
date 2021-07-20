@@ -8,43 +8,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.log = void 0;
 var chalk_1 = __importDefault(require("chalk"));
 function log(msg, type) {
-  var loggers = [
-    {
-      name: "info",
-      log: function () {
-        console.log(chalk_1.default.whiteBright("INFO"), msg);
-      },
-    },
-    {
-      name: "error",
-      log: function () {
-        console.log(chalk_1.default.redBright("ERROR"), msg);
-      },
-    },
-    {
-      name: "success",
-      log: function () {
-        console.log(chalk_1.default.greenBright("SUCCESS"), msg);
-      },
-    },
-    {
-      name: "shard",
-      log: function () {
-        console.log(chalk_1.default.magentaBright("SHARD"), msg);
-      },
-    },
-    {
-      name: "warn",
-      log: function () {
-        console.log(chalk_1.default.yellowBright("WARN"), msg);
-      },
-    },
-  ];
-  var types = loggers.map(function (logger) {
-    return logger.name;
-  });
-  var logtype = types.indexOf(type);
-  loggers[logtype].log();
+  console.log(chalk_1.default.greenBright(type), msg);
   return null;
 }
 exports.log = log;
