@@ -17,9 +17,11 @@ const bot = new Discord.Client({
   },
 });
 
-// const commandFiles = readdirSync("./commands");
-// console.log(commandFiles)
-// const commands = new Discord.Collection();
+const commandFiles = readdirSync(__dirname + "/commands").filter((file) =>
+  file.endsWith(".js")
+);
+const commands = new Discord.Collection();
+commandFiles.forEach((commandFile) => {});
 
 bot.on("ready", async () => {
   log(`Logged in as ${bot.user!.tag}`, "SUCCESS");
