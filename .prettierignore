@@ -1,6 +1,6 @@
+./dist
+./husky
 .prettierrc.toml
 .prettierignore
 .gitignore
-.dist
-.husky
 tsconfig.json
