@@ -1,11 +1,11 @@
-export const info = {
+module.exports = {
   name: "ping",
   aliases: ["latency"],
   ownerOnly: false,
   nonOwnerAccessIDS: [],
   guildOnly: false,
   guildMemberPermsRequired: [],
+  run() {
+    console.log("e");
+  },
 };
-export function run() {
-  console.log("e");
-}

@@ -26,19 +26,16 @@ const commandFiles = readdirSync(__dirname + "/commands").filter((file) =>
   file.endsWith(".js")
 );
 
-// Create the collection where commands go
+// Create the collections where commands and cooldowns go
 const commands = new Discord.Collection();
-// Require each command and add it to the collection
+const coolsdowns = new Discord.Collection();
+// Require each command and add it to the both collections
 commandFiles.forEach((commandFile) => {
-  const { info, run } = require(`./commands/${commandFile.replace(".js", "")}`);
-  // Add the command to the commands collection
-  commands.set(info.name, {
-    info: info,
-    run: run,
-  });
+  const command = require(`./commands/${commandFile.replace(".js", "")}`);
+  // Add the command to the commands and cooldowns collection
+  commands.set(command.name, command);
+  cooldowns.set(command.name, new Discord.Collection());
 });
-
-// cooldowns.set(command!.info.name, new Discord.Collection());
 
 bot.on("ready", async () => {
   log(`Logged in as ${bot.user.tag}`, "SUCCESS");
