@@ -1,7 +1,7 @@
 import { CommandInfo } from "../../typings";
 export const info: CommandInfo = {
-  name: "e",
-  aliases: ["e", "fdw"],
+  name: "ping",
+  aliases: ["latency"],
   ownerOnly: false,
   nonOwnerAccessIDS: [],
   guildOnly: false,

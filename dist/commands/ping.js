@@ -2,8 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.run = exports.info = void 0;
 exports.info = {
-  name: "e",
-  aliases: ["e", "fdw"],
+  name: "ping",
+  aliases: ["latency"],
   ownerOnly: false,
   nonOwnerAccessIDS: [],
   guildOnly: false,
