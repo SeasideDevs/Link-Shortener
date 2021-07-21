@@ -1,5 +1,5 @@
-import { ShardingManager } from "discord.js";
-import { log } from "./functions/logger";
+const { ShardingManager } = require("discord.js");
+const { log } = require("./functions/logger");
 const manager = new ShardingManager(__dirname + "/bot.js", {
   token: process.env.BOT_TOKEN,
 });

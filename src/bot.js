@@ -1,6 +1,6 @@
-import Discord from "discord.js";
-import { log } from "./functions/logger";
-import { readdirSync } from "fs";
+const Discord = require("discord.js");
+const { log } = require("./functions/logger");
+const { readdirSync } = require("fs");
 const bot = new Discord.Client({
   disableMentions: "all",
   allowedMentions: {
@@ -62,7 +62,7 @@ bot.on("message", async (msg) => {
   const args = msg.content.slice(config.prefix.length).trim().split(/ +/);
   console.log(args);
   /* 
-    Grab the first item from the args array (which would be the command name).
+    Grab the first item = require(the args array (which would be the command name)).
     Then convert it to lowercase
   */
   const commandName = args.shift().toLowerCase();
