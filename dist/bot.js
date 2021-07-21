@@ -207,11 +207,16 @@ bot.on("message", function (msg) {
   return __awaiter(void 0, void 0, void 0, function () {
     var args, commandName, command;
     return __generator(this, function (_a) {
-      console.log(msg);
+      console.log(msg.content);
       if (!msg.content.startsWith(config.prefix) || msg.author.bot)
         return [2 /*return*/];
-      args = msg.content.slice(config.prefix.length).trim().split(/ +/);
+      args = msg.content
+        .slice(config.prefix.length - 1)
+        .trim()
+        .split(/ +/);
+      console.log(args);
       commandName = args.shift().toLowerCase();
+      console.log(commandName);
       command = commands.get(commandName);
       if (!command) {
         return [
