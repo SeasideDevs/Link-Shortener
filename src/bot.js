@@ -67,13 +67,13 @@ bot.on("message", async (msg) => {
   */
   const commandName = args.shift().toLowerCase();
   const command = commands.get(commandName);
-  console.log(command);
   // If the command isn't a valid command send a error message
   if (!command) {
     return msg.channel.send(
       "I can't seem to find that command. Make sure you didn't mispell it!"
     );
   }
+  command.run();
 });
 
 bot.login();
