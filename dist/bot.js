@@ -156,13 +156,29 @@ var bot = new discord_js_1.default.Client({
     intents: ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES"],
   },
 });
+var config = {
+  prefix: ">>",
+};
+// Read all files in the commands directory and filter out ones that don't end in .js
 var commandFiles = fs_1
   .readdirSync(__dirname + "/commands")
   .filter(function (file) {
     return file.endsWith(".js");
   });
+// Create the collection where commands go
 var commands = new discord_js_1.default.Collection();
-commandFiles.forEach(function (commandFile) {});
+// Require each command and add it to the collection
+commandFiles.forEach(function (commandFile) {
+  var _a = require("./commands/" + commandFile.replace(".js", "")),
+    info = _a.info,
+    run = _a.run;
+  // Add the command to the commands collection
+  commands.set(info.name, {
+    info: info,
+    run: run,
+  });
+});
+// cooldowns.set(command!.info.name, new Discord.Collection());
 bot.on("ready", function () {
   return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
@@ -189,8 +205,22 @@ bot.on("guildDelete", function (guild) {
 });
 bot.on("message", function (msg) {
   return __awaiter(void 0, void 0, void 0, function () {
+    var args, commandName, command;
     return __generator(this, function (_a) {
-      if (msg.author.bot) return [2 /*return*/];
+      console.log(msg);
+      if (!msg.content.startsWith(config.prefix) || msg.author.bot)
+        return [2 /*return*/];
+      args = msg.content.slice(config.prefix.length).trim().split(/ +/);
+      commandName = args.shift().toLowerCase();
+      command = commands.get(commandName);
+      if (!command) {
+        return [
+          2 /*return*/,
+          msg.channel.send(
+            "I can't seem to find that command. Make sure you didn't mispell it!"
+          ),
+        ];
+      }
       return [2 /*return*/];
     });
   });
