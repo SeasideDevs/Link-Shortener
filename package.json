@@ -9,6 +9,7 @@
     "start": "node -r dotenv/config src/index.js"
   },
   "dependencies": {
+    "@iarna/toml": "^3.0.0",
     "bufferutil": "^4.0.3",
     "chalk": "^4.1.1",
     "discord.js": "^12.5.3",
