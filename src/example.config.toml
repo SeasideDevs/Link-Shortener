@@ -1,9 +1,17 @@
 [owner]
 ids = []
 reduce_cooldowns = false
+reduce_cooldowns_blacklist = []
 bypass_cooldowns = false
+bypass_cooldowns_blacklist = []
 
 [colors]
 main = ""
 warn = ""
 error = ""
+
+[logging]
+join = false
+leave = false
+
+[logging.system]
