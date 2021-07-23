@@ -17,9 +17,8 @@ const bot = new Discord.Client({
   },
 });
 
-const config = {
-  prefix: ">>",
-};
+const { parseConfig } = require("./functions/config");
+const config = parseConfig();
 
 // Read all files in the commands directory and filter out ones that don't end in .js
 const commandFiles = readdirSync(__dirname + "/commands").filter((file) =>
@@ -28,7 +27,7 @@ const commandFiles = readdirSync(__dirname + "/commands").filter((file) =>
 
 // Create the collections where commands and cooldowns go
 const commands = new Discord.Collection();
-const coolsdowns = new Discord.Collection();
+const cooldowns = new Discord.Collection();
 // Require each command and add it to the both collections
 commandFiles.forEach((commandFile) => {
   const command = require(`./commands/${commandFile.replace(".js", "")}`);
