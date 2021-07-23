@@ -53,4 +53,4 @@ typings/
 .env.test
 
 # Config
-example.config.toml
+config.toml
