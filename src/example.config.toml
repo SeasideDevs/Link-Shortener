@@ -1,0 +1,9 @@
+[owner]
+ids = []
+reduce_cooldowns = false
+bypass_cooldowns = false
+
+[colors]
+main = ""
+warn = ""
+error = ""
