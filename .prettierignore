@@ -3,4 +3,5 @@
 .prettierrc.toml
 .prettierignore
 .gitignore
+example.config.toml
 tsconfig.json

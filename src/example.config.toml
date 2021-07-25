@@ -2,11 +2,9 @@
 [owner]
 ids = [] # Owner IDS used for owner locking certain commands
 reduce_cooldowns = false # Reduce cooldowns for owners
-reduce_cooldowns_blacklist = [
-] # Blacklist certain owners from having a reduced cooldown
+reduce_cooldowns_blacklist = [] # Blacklist certain owners from having a reduced cooldown
 bypass_cooldowns = false # Bypass cooldowns for owners
-bypass_cooldowns_blacklist = [
-] # Blacklist certain owners from having a reduced cooldown
+bypass_cooldowns_blacklist = [] # Blacklist certain owners from having a reduced cooldown
 
 # Colors used for embeds
 [colors]
