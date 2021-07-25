@@ -1,17 +1,57 @@
+# Owner related options
 [owner]
-ids = []
-reduce_cooldowns = false
-reduce_cooldowns_blacklist = []
-bypass_cooldowns = false
-bypass_cooldowns_blacklist = []
+ids = [] # Owner IDS used for owner locking certain commands
+reduce_cooldowns = false # Reduce cooldowns for owners
+reduce_cooldowns_blacklist = [
+] # Blacklist certain owners from having a reduced cooldown
+bypass_cooldowns = false # Bypass cooldowns for owners
+bypass_cooldowns_blacklist = [
+] # Blacklist certain owners from having a reduced cooldown
 
+# Colors used for embeds
 [colors]
-main = ""
-warn = ""
-error = ""
+main = "#2ecc71" # Used for most embeds
+warn = "#addb67" # Used to in embeds warning the user like an invalid arguments embed
+error = "#ef5350" # used for embeds showing the user an error that happened like a missing command embed
 
-[logging]
-join = false
-leave = false
+# Colors used for the local console and webhook logging system
+[colors.logging]
+join = "#2ecc71"
+leave = "#2ecc71"
+success = "#2ecc71"
+info = "#82aaff"
+warning = "#addb67"
+error = "#ef5350"
+debug = "#f78c6c"
+shard_success = "#2ecc71"
+shard_info = "#82aaff"
+shard_warning = "#addb67"
+shard_error = "#ef5350"
 
-[logging.system]
+# Used to determine what is logged to the local console
+[logging.local]
+guild_join = false # Logs when the bot joins a guild
+guild_leave = false # Logs when the bot leave a guild
+success = true # Logs successful operations
+info = true # Logs important information
+warning = true # Logs warnings
+error = true # Logs errors
+debug = true # Logs debug messages used in development
+shard_success = true # Logs successful shard operations
+shard_info = true # Logs important information
+shard_warning = true # Logs warnings
+shard_error = true # Logs errors
+
+# Used to determine what is logged to the logging webhook
+[logging.webhook]
+guild_join = false # Logs when the bot joins a guild
+guild_leave = false # Logs when the bot leave a guild
+success = true # Logs successful operations
+info = true # Logs important information
+warning = true # Logs warnings
+error = true # Logs errors
+debug = true # Logs debug messages used in development
+shard_success = true # Logs successful shard operations
+shard_info = true # Logs important information
+shard_warning = true # Logs warnings
+shard_error = true # Logs errors
