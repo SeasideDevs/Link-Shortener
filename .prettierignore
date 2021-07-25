@@ -4,5 +4,6 @@
 .prettierignore
 .gitignore
 example.config.toml
-config.toml
 tsconfig.json
+example.env
+config.toml
