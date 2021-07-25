@@ -1,4 +1,6 @@
 const chalk = require("chalk");
+const { parseConfig } = require("./config");
+const config = parseConfig();
 module.exports = {
   log(msg, type) {
     const logTypes = [
@@ -15,8 +17,11 @@ module.exports = {
       "shard_error",
     ];
     if (!logTypes.includes(type)) {
+      console.log(chalk.redBright("ERROR"), "Invalid Log Type");
       throw new TypeError("Invalid logger type");
     }
-    console.log(chalk.hex(config.colors.logging[type]));
+    // This just makes the type more human friendly
+    const humanType = type.toUpperCase().replace("_", " ");
+    console.log(chalk.hex(config.colors.logging[type])(humanType), msg);
   },
 };
