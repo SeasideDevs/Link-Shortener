@@ -17,6 +17,7 @@ const bot = new Discord.Client({
   },
 });
 
+// TODO: Debug logging is on the config parser file not here
 const { parseConfig } = require("./functions/config");
 const config = parseConfig();
 
@@ -37,15 +38,15 @@ commandFiles.forEach((commandFile) => {
 });
 
 bot.on("ready", async () => {
-  log(`Logged in as ${bot.user.tag}`, "SUCCESS");
+  log(`Logged in as ${bot.user.tag}`, "success");
 });
 
 bot.on("guildCreate", async (guild) => {
-  log(`Joined ${guild.name} (${guild.id})`, "INFO");
+  log(`Joined ${guild.name} (${guild.id})`, "join");
 });
 
 bot.on("guildDelete", async (guild) => {
-  log(`Left ${guild.name} (${guild.id})`, "INFO");
+  log(`Left ${guild.name} (${guild.id})`, "leave");
 });
 
 bot.on("message", async (msg) => {
@@ -56,7 +57,6 @@ bot.on("message", async (msg) => {
     Lastly split the message content into an array of arguments
   */
   const args = msg.content.slice(config.prefix.length).trim().split(/ +/);
-  console.log(args);
   /* 
     Grab the first item = require(the args array (which would be the command name)).
     Then convert it to lowercase
