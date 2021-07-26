@@ -50,13 +50,16 @@ bot.on("guildDelete", async (guild) => {
 });
 
 bot.on("message", async (msg) => {
-  if (!msg.content.startsWith(config.prefix) || msg.author.bot) return;
+  if (!msg.content.startsWith(config.prefixes.prefix) || msg.author.bot) return;
   /* 
     Get the msg content with the prefix cut off.
     Then use trim() to remove useless white space at the start or finish
     Lastly split the message content into an array of arguments
   */
-  const args = msg.content.slice(config.prefix.length).trim().split(/ +/);
+  const args = msg.content
+    .slice(config.prefixes.prefix.length)
+    .trim()
+    .split(/ +/);
   /* 
     Grab the first item = require(the args array (which would be the command name)).
     Then convert it to lowercase
@@ -69,7 +72,7 @@ bot.on("message", async (msg) => {
       "I can't seem to find that command. Make sure you didn't mispell it!"
     );
   }
-  command.run();
+  command.run(msg, bot, config);
 });
 
 bot.login();
