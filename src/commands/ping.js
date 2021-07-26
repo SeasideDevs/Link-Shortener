@@ -5,7 +5,7 @@ module.exports = {
   nonOwnerAccessIDS: [],
   guildOnly: false,
   guildMemberPermsRequired: [],
-  run() {
-    console.log("e");
+  async run(msg, bot, config) {
+    msg.channel.send("pong or whatever");
   },
 };
