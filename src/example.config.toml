@@ -6,6 +6,12 @@ reduce_cooldowns_blacklist = [] # Blacklist certain owners from having a reduced
 bypass_cooldowns = false # Bypass cooldowns for owners
 bypass_cooldowns_blacklist = [] # Blacklist certain owners from having a reduced cooldown
 
+# Prefix related options
+[prefixes]
+list = [] # A list of prefixes that the bot will reply to
+mention_prefix = true # Whether the bot will respond to a command using a bot mentions instead of a prefix
+role_mention_prefix = true # Whether the bot will respond to a command using a bot role (the role created when a bot joins) mention instead of a prefix
+
 # Colors used for embeds
 [colors]
 main = "#2ecc71" # Used for most embeds
