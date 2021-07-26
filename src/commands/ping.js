@@ -6,6 +6,7 @@ module.exports = {
   guildOnly: false,
   guildMemberPermsRequired: [],
   async run(msg, bot, config) {
-    msg.channel.send("pong or whatever");
+    const message = await msg.channel.send("Pong?");
+    message.edit(`Pong!\n${Date.now() - message.createdTimestamp}ms`);
   },
 };
