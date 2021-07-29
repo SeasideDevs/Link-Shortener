@@ -68,14 +68,15 @@ bot.on("message", async (msg) => {
   const command = commands.get(commandName);
   // If the command isn't a valid command send a error message
   if (!command) {
-    return msg.channel.send(
+    const errorMsg = await msg.channel.send(
       new Discord.MessageEmbed()
         .setColor(config.colors.error)
         .setTitle("Command not found!")
         .setDescription(
-          `The command ${commandName} doesn't exist! Make sure you didn't mispell it.`
+          `The command **${commandName}** doesn't exist! Make sure you didn't mispell it.`
         )
     );
+    return errorMsg.react(config.emojis.error);
   }
   command.run(msg, bot, config);
 });
