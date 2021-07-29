@@ -12,11 +12,11 @@ list = [] # A list of prefixes that the bot will reply to
 mention_prefix = true # Whether the bot will respond to a command using a bot mentions instead of a prefix
 role_mention_prefix = true # Whether the bot will respond to a command using a bot role (the role created when a bot joins) mention instead of a prefix
 
-# Emojis used for reacting in response to a certain event (success, warn, error). This can be either a unicode emoji or a Discord emoji ID
+# Emojis used for reacting in response to a certain event (success, warn, error). This has to be a custom emoji ID
 [emojis]
-success = "✅" # Used for success events
-warn = "❗" # Used for warnings
-error = "❌" # Used for errors
+success = "869103772952059934" # Used for success events
+warn = "869103848369827880" # Used for warnings
+error = "869103848369827880" # Used for errors
 
 # Colors used for embeds
 [colors]

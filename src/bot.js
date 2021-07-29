@@ -41,6 +41,11 @@ bot.on("ready", async () => {
   log(`Logged in as ${bot.user.tag}`, "success");
 });
 
+// Turn emoji IDs into a usable format
+config.emojis.success = bot.emojis.resoleID(config.emojis.success);
+config.emojis.warn = bot.emojis.resoleID(config.emojis.warn);
+config.emojis.error = bot.emojis.resoleID(config.emojis.error);
+
 bot.on("guildCreate", async (guild) => {
   log(`Joined ${guild.name} (${guild.id})`, "join");
 });
