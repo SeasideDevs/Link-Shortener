@@ -14,9 +14,12 @@ role_mention_prefix = true # Whether the bot will respond to a command using a b
 
 # Emojis used for reacting in response to a certain event (success, warn, error). This has to be a custom emoji ID
 [emojis]
-success = "869103772952059934" # Used for success events
-warn = "869103848369827880" # Used for warnings
-error = "869103848369827880" # Used for errors
+success = "<:success:869103772952059934>" # The emoji but formatted in the format so it can be used in message. To get this just put a \ in front of the emoji when sending it.
+success_id = "869103772952059934" # Used for success events
+warn = "<:error:869103848369827880>" # The emoji but formatted in the format so it can be used in message. To get this just put a \ in front of the emoji when sending it.
+warn_id = "869103848369827880" # Used for warnings
+error = "<:error:869103848369827880>" # The emoji but formatted in the format so it can be used in message. To get this just put a \ in front of the emoji when sending it.
+error_id = "869103848369827880" # Used for errors
 
 # Colors used for embeds
 [colors]
