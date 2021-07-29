@@ -78,7 +78,7 @@ bot.on("message", async (msg) => {
     );
     return errorMsg.react(config.emojis.error);
   }
-  command.run(msg, bot, config);
+  command.run(msg, bot, Discord, config);
 });
 
 bot.login();
