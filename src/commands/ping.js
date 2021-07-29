@@ -13,14 +13,29 @@ module.exports = {
         .setTitle("Pong?")
         .setDescription("Awaiting Results")
     );
+    // e
+    const ping = {
+      bot: Date.now() - message.createdAt,
+      api: bot.ws.ping,
+    };
+    if ((ping.bot > 500) | (ping.api > 250)) {
+      return config.colors.warn;
+    }
     // Edit the embed with the ping
     message.edit(
       message.embeds[0]
         .setTitle("Pong!")
+        .setColor(
+          (ping.bot > 500) | (ping.api > 250)
+            ? config.colors.warn
+            : config.colors.main
+        )
         .setDescription(
-          `**Latency:** ${Date.now() - message.createdAt}ms\n**API Latency**: ${
-            bot.ws.ping
-          }ms`
+          `${
+            ping.bot > 500 ? config.emojis.warn : config.emojis.success
+          } **Latency:** ${ping.bot}ms\n${
+            ping.api > 250 ? config.emojis.warn : config.emojis.success
+          } **API Latency**: ${ping.api}ms`
         )
     );
   },
