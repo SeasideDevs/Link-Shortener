@@ -50,33 +50,60 @@ bot.on("guildDelete", async (guild) => {
 });
 
 bot.on("message", async (msg) => {
-  if (!msg.content.startsWith(config.prefixes.prefix) || msg.author.bot) return;
+  // If the user is a bot return
+  if (msg.author.bot) return;
+  let prefix;
+  /*
+    Go through each prefix and check if the msg starts with one of them.
+    If one does the set the prefix variable to that.
+  */
+  config.prefixes.list.forEach((listedPrefix) => {
+    if (msg.content.startsWith(listedPrefix)) {
+      prefix = listedPrefix;
+    }
+  });
+  /*
+    If no valid prefix was used then the prefix variable would be undefined.
+    So we check for that and if it's undefined return.
+  */
+  if (!prefix) return;
   /* 
     Get the msg content with the prefix cut off.
-    Then use trim() to remove useless white space at the start or finish
-    Lastly split the message content into an array of arguments
+    Then use trim() to remove useless white space at the start or finish.
+    Lastly split the message content into an array of arguments.
   */
-  const args = msg.content
-    .slice(config.prefixes.prefix.length)
-    .trim()
-    .split(/ +/);
+  const args = msg.content.slice(prefix.length).trim().split(/ +/);
   /* 
-    Grab the first item = require(the args array (which would be the command name)).
-    Then convert it to lowercase
+    Grab the first item from the args array (which would be the command name).
+    Then convert it to lowercase.
   */
   const commandName = args.shift().toLowerCase();
+  /*
+    Check if the commandName is an empty string.
+    If so then return an error message about not providing a command to run
+  */
+  if (commandName === "") {
+    return msg.channel.send(
+      new Discord.MessageEmbed()
+        .setColor(config.colors.error)
+        .setTitle("You didn't provide a command!")
+        .setDescription(
+          `You didn't a provide a command to run! To see a list of available commands run **${prefix}help**`
+        )
+    );
+  }
   const command = commands.get(commandName);
   // If the command isn't a valid command send a error message
   if (!command) {
-    const errorMsg = await msg.channel.send(
+    msg.react(config.emojis.error);
+    return (errorMsg = await msg.channel.send(
       new Discord.MessageEmbed()
         .setColor(config.colors.error)
         .setTitle("Command not found!")
         .setDescription(
           `The command **${commandName}** doesn't exist! Make sure you didn't mispell it.`
         )
-    );
-    return errorMsg.react(config.emojis.error);
+    ));
   }
   command.run(msg, bot, Discord, config);
 });
