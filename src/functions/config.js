@@ -1,5 +1,5 @@
 const { parse } = require("@iarna/toml");
-const { readFileSync, readdirSync } = require("fs");
+const { readFileSync } = require("fs");
 const parseConfig = () => {
   const configFile = readFileSync(__dirname + "/../config.toml", {
     encoding: "utf-8",

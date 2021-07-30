@@ -1,10 +1,16 @@
 module.exports = {
   name: "ping",
   aliases: ["latency"],
-  ownerOnly: false,
-  nonOwnerAccessIDS: [],
-  guildOnly: false,
-  guildMemberPermsRequired: [],
+  access: {
+    ownerOnly: false,
+    nonOwnerAccessIDS: [],
+    guildOnly: false,
+    guildMemberPermsRequired: [],
+  },
+  cooldowns: {
+    normal: "2",
+    reduced: "0.5",
+  },
   async run(msg, bot, discord, config) {
     // Send the embed
     const message = await msg.channel.send(
