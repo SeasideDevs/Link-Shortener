@@ -9,7 +9,7 @@ module.exports = {
   },
   cooldowns: {
     normal: "2",
-    reduced: "0.5",
+    reduced: "60s",
   },
   async run(msg, bot, discord, config) {
     // Send the embed
