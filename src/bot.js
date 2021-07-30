@@ -105,6 +105,29 @@ bot.on("message", async (msg) => {
         )
     ));
   }
+  const cooldown = cooldowns.get(commandName).get(msg.user.id);
+  // Run this is there is a cooldown in the collection
+  if (cooldown) {
+    if (Date.now() < cooldown.expiresAt) {
+      return msg.channel.send(
+        new Discord.MessageEmbed()
+          .setColor(config.colors.error)
+          .setTitle("Woah there! Slow down a little.")
+          .setDescription(
+            `You can run this command again in **${Math.round(
+              cooldown.expiresAt - Date.now() / 1000
+            )}** seconds!`
+          )
+      );
+    }
+  }
+  // If there isn't any cooldown yet then make one and let the user run the command.
+  if (!cooldown) {
+    if (command.cooldowns.normal.endsWith("d"))
+      cooldown.set(msg.user.id, {
+        expiresAt: Date.now() + command.cooldown,
+      });
+  }
   command.run(msg, bot, Discord, config);
 });
 
