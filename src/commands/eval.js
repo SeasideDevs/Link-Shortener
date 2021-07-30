@@ -1,6 +1,6 @@
 module.exports = {
-  name: "ping",
-  aliases: ["latency"],
+  name: "eval",
+  aliases: ["e"],
   access: {
     ownerOnly: true,
     nonOwnerAccessIDS: [],
