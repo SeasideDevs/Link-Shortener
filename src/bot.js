@@ -50,37 +50,31 @@ bot.on("guildDelete", async (guild) => {
 });
 
 bot.on("message", async (msg) => {
-  // If the user is a bot return
   if (msg.author.bot) return;
   let prefix;
   /*
     Go through each prefix and check if the msg starts with one of them.
     If one does the set the prefix variable to that.
+    If no valid prefix was used then the variable stays undefined and we return
   */
   config.prefixes.list.forEach((listedPrefix) => {
     if (msg.content.startsWith(listedPrefix)) {
       prefix = listedPrefix;
     }
   });
-  /*
-    If no valid prefix was used then the prefix variable would be undefined.
-    So we check for that and if it's undefined return.
-  */
   if (!prefix) return;
   /* 
     Get the msg content with the prefix cut off.
     Then use trim() to remove useless white space at the start or finish.
     Lastly split the message content into an array of arguments.
+    Then grab the command name item (first array item) and lowercase it.
   */
   const args = msg.content.slice(prefix.length).trim().split(/ +/);
-  /* 
-    Grab the first item from the args array (which would be the command name).
-    Then convert it to lowercase.
-  */
   const commandName = args.shift().toLowerCase();
   /*
     Check if the commandName is an empty string.
-    If so then return an error message about not providing a command to run
+    If so then return an error message about not providing a command to run.
+    If the command isn't a valid one then error
   */
   if (commandName === "") {
     return msg.channel.send(
@@ -93,7 +87,6 @@ bot.on("message", async (msg) => {
     );
   }
   const command = commands.get(commandName);
-  // If the command isn't a valid command send a error message
   if (!command) {
     msg.react(config.emojis.error);
     return (errorMsg = await msg.channel.send(
@@ -105,6 +98,7 @@ bot.on("message", async (msg) => {
         )
     ));
   }
+  // Check if the user is allowed to use a owner only command
   if (command.access.ownerOnly) {
     if (
       !config.owner.ids
@@ -121,7 +115,9 @@ bot.on("message", async (msg) => {
       );
     }
   }
-  const cooldown = cooldowns.get(commandName).get(msg.author.id);
+  const cooldownItem = cooldowns.get(commandName).get(msg.author.id);
+  const { check } = require("./functions/cooldown");
+  check(cooldownItem, cooldowns, command, msg);
 
   command.run(msg, bot, Discord, config);
 });
