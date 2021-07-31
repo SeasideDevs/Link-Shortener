@@ -11,7 +11,7 @@ module.exports = {
     normal: "2",
     reduced: "1",
   },
-  async run(msg, bot, discord, config, args, log) {
+  async run(msg, bot, discord, config, args) {
     // Send the embed
     const message = await msg.channel.send(
       new discord.MessageEmbed()
