@@ -54,7 +54,7 @@ module.exports = {
         );
         `     `;
       }
-      log("An error occured while trying to shorten a link", "error");
+      bot.log("An error occured while trying to shorten a link", "error");
       return message.edit(
         new discord.MessageEmbed()
           .setColor(config.colors.error)
