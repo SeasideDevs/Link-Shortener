@@ -119,7 +119,7 @@ bot.on("message", async (msg) => {
   const { check } = require("./functions/cooldown");
   check(cooldownItem, cooldowns, command, msg);
 
-  command.run(msg, bot, Discord, config);
+  command.run(msg, bot, Discord, config, args);
 });
 
 bot.login();

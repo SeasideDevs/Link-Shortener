@@ -11,7 +11,7 @@ module.exports = {
     normal: "2",
     reduced: "60s",
   },
-  async run(msg, bot, discord, config) {
+  async run(msg, bot, discord, config, args) {
     // Send the embed
     const message = await msg.channel.send(
       new discord.MessageEmbed()
@@ -23,6 +23,7 @@ module.exports = {
       bot: Date.now() - message.createdAt,
       api: bot.ws.ping,
     };
+    console.log(ping)
     if ((ping.bot > 500) | (ping.api > 250)) {
       return config.colors.warn;
     }
