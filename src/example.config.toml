@@ -8,11 +8,10 @@ bypass_cooldowns_blacklist = []
 [prefixes]
 list = [] 
 mention_prefix = true 
-role_mention_prefix = true 
 
 [emojis]
 success = "<:success:869103772952059934>"
-warn = "<:error:869103848369827880>"
+warn = "<:warn:870943860455505990>"
 error = "<:error:869103848369827880>"
 
 [colors]
