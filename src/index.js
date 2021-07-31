@@ -7,10 +7,10 @@ const manager = new ShardingManager(__dirname + "/bot.js", {
 manager.on("shardCreate", (shard) => {
   log(`Shard #${shard.id} Started`, "shard_info");
   shard.on("death", () => {
-    log(`Shard #{shard.id} died`, "shard_error");
+    log(`Shard #${shard.id} Died`, "shard_error");
   });
   shard.on("disconnect", () => {
-    log(`Shard #${shard.id} was disconnected`, "shard_warning");
+    log(`Shard #${shard.id} was Disconnected`, "shard_warning");
   });
   shard.on("reconnecting", () => {
     log(`Shard #${shard.id} is attempting to reconnect`, "shard_warning");
