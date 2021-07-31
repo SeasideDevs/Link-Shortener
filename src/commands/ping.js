@@ -9,7 +9,7 @@ module.exports = {
   },
   cooldowns: {
     normal: "2",
-    reduced: "60s",
+    reduced: "1",
   },
   async run(msg, bot, discord, config, args, log) {
     // Send the embed
@@ -20,7 +20,7 @@ module.exports = {
         .setDescription("Awaiting Results")
     );
     const ping = {
-      bot: Date.now() - message.createdAt,
+      bot: message.createdTimestamp - msg.createdTimestamp,
       api: bot.ws.ping,
     };
     console.log(ping);
@@ -28,7 +28,7 @@ module.exports = {
       return config.colors.warn;
     }
     // Edit the embed with the ping
-    message.edit(
+    await message.edit(
       message.embeds[0]
         .setTitle("Pong!")
         .setColor(
