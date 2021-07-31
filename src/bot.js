@@ -87,7 +87,7 @@ bot.on("message", async (msg) => {
     );
   }
   const command = commands.get(commandName);
-  if (!command) {
+  if (!command && config.general.show_command_not_found) {
     msg.react(config.emojis.error);
     return (errorMsg = await msg.channel.send(
       new Discord.MessageEmbed()
