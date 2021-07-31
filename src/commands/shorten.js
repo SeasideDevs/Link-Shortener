@@ -20,9 +20,10 @@ module.exports = {
     );
     const fetch = require("node-fetch");
     const res = await fetch(
-      `https://is.gd/ceate.php?format=simple&url=${args[0]}`
+      `https://is.gd/create.php?format=simple&url=${args[0]}`
     );
     if (!res.ok) {
+      log("An error occured while trying to shorten a link", "error");
       return message.edit(
         new discord.MessageEmbed()
           .setColor(config.colors.error)
@@ -36,7 +37,7 @@ module.exports = {
     msg.channel.send(
       new discord.MessageEmbed()
         .setColor(config.colors.main)
-        .setTitle("success")
+        .setTitle("Here is your link!")
         .setDescription(`${url}`)
     );
   },
