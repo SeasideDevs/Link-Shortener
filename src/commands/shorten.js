@@ -34,11 +34,11 @@ module.exports = {
       );
     }
     const url = await res.text();
-    msg.channel.send(
+    message.edit(
       new discord.MessageEmbed()
         .setColor(config.colors.main)
-        .setTitle("Here is your link!")
-        .setDescription(`${url}`)
+        .setTitle("Here's your link!")
+        .setDescription(`${config.emojis.success} ${url}`)
     );
   },
 };
