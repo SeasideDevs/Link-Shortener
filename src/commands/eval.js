@@ -11,7 +11,7 @@ module.exports = {
     normal: "2",
     reduced: "0.5",
   },
-  async run(msg, bot, discord, config, args) {
+  async run(msg, bot, discord, config, args, log) {
     console.log("evel");
   },
 };
