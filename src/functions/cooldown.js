@@ -44,7 +44,7 @@ module.exports = {
     // Run this is there is a cooldown in the collection
     if (cooldownItem) {
       if (Date.now() < cooldownItem.expiresAt) {
-        return msg.channel.send(
+        await msg.channel.send(
           new MessageEmbed()
             .setColor(config.colors.error)
             .setTitle("Woah there! Slow down a little.")
