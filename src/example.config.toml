@@ -10,6 +10,10 @@ list = []
 mention_prefix = true 
 role_mention_prefix = true 
 
+[general.cooldown]
+on_cooldown_error = "Woah! You're using that command too quickly."
+on_cooldown_error_description = "You can run this command again in **$time$** second(s)!"
+
 [emojis]
 success = "<:success:869103772952059934>"
 warn = "<:error:869103848369827880>"

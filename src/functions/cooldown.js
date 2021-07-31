@@ -1,4 +1,5 @@
 const { log } = require("./logger");
+const { MessageEmbed } = require("discord.js");
 const { parseConfig } = require("./config");
 const config = parseConfig();
 
@@ -33,27 +34,29 @@ const set = async (cooldowns, command, msg) => {
     cooldownTimeInMS = command.cooldowns[cooldownType] * 1000;
   }
 
-  cooldowns.set(msg.author.id, {
+  cooldowns.get(command.name).set(msg.author.id, {
     expiresAt: Date.now() + cooldownTimeInMS,
   });
-  console.log(cooldowns.get(msg.author.id));
 };
 module.exports = {
   async check(cooldownItem, cooldowns, command, msg) {
     // Run this is there is a cooldown in the collection
     if (cooldownItem) {
       if (Date.now() < cooldownItem.expiresAt) {
-        return msg.channel.send(
-          new Discord.MessageEmbed()
+        msg.channel.send(
+          new MessageEmbed()
             .setColor(config.colors.error)
-            .setTitle("Woah there! Slow down a little.")
+            .setTitle(config.general.cooldown.on_cooldown_error)
             .setDescription(
-              `You can run this command again in **${Math.round(
-                cooldownItem.expiresAt - Date.now() / 1000
-              )}** seconds!`
+              config.general.cooldown.on_cooldown_error_description.replace(
+                "$time$",
+                ((cooldownItem.expiresAt - Date.now()) / 1000)
+              )
             )
         );
+        return true;
       }
+      else cooldowns.get(command.name).delete(msg.author.id)
     }
 
     // If there isn't any cooldown yet then make one and let the user run the command.

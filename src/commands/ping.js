@@ -8,8 +8,8 @@ module.exports = {
     guildMemberPermsRequired: [],
   },
   cooldowns: {
-    normal: "2",
-    reduced: "60s",
+    normal: "2s",
+    reduced: "1s",
   },
   async run(msg, bot, discord, config) {
     // Send the embed
