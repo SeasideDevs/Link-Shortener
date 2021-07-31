@@ -19,7 +19,6 @@ module.exports = {
         .setTitle("Pong?")
         .setDescription("Awaiting Results")
     );
-    // e
     const ping = {
       bot: Date.now() - message.createdAt,
       api: bot.ws.ping,
