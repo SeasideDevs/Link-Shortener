@@ -46,14 +46,15 @@ module.exports = {
         await msg.channel.send(
           new MessageEmbed()
             .setColor(config.colors.error)
-            .setTitle("Woah there! Slow down a little.")
+            .setTitle("Slow down there!")
             .setDescription(
-              `You can run this command again in **${Math.round(
+              `You can use this command again in **${
                 cooldownItem.expiresAt - Date.now() / 1000
-              )}** seconds!`
+              }** seconds!`
             )
         );
-      }
+        return true;
+      } else cooldowns.get(command.name).delete(msg.author.id);
     }
 
     // If there isn't any cooldown yet then make one and let the user run the command.
