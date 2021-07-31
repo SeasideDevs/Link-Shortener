@@ -23,7 +23,6 @@ module.exports = {
       bot: message.createdTimestamp - msg.createdTimestamp,
       api: bot.ws.ping,
     };
-    console.log(ping);
     if ((ping.bot > 500) | (ping.api > 250)) {
       return config.colors.warn;
     }
