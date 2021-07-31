@@ -16,11 +16,11 @@ module.exports = {
       new discord.MessageEmbed()
         .setColor(config.colors.main)
         .setTitle("Generating Link")
-        .setDescription("Hold on as I create your link!")
+        .setDescription("Please wait while I create your link!")
     );
     const fetch = require("node-fetch");
     const res = await fetch(
-      `https://is.gd/create.php?format=simple&url=${args[0]}`
+      `https://is.gd/ceate.php?format=simple&url=${args[0]}`
     );
     if (!res.ok) {
       return message.edit(
@@ -28,7 +28,7 @@ module.exports = {
           .setColor(config.colors.error)
           .setTitle("An error ocurred!")
           .setDescription(
-            "An unknown error occured! The developers have been notified and this command has been temporarily locked!"
+            `${config.emojis.error} An unknown error occured! The developers have already been notified! If this keeps happening join the [support server](https://is.gd/rickroll)!`
           )
       );
     }
