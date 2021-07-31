@@ -1,4 +1,5 @@
 const { log } = require("./logger");
+const { MessageEmbed } = require("discord.js");
 const { parseConfig } = require("./config");
 const config = parseConfig();
 
@@ -33,7 +34,7 @@ const set = async (cooldowns, command, msg) => {
     cooldownTimeInMS = command.cooldowns[cooldownType] * 1000;
   }
 
-  cooldowns.set(msg.author.id, {
+  cooldowns.get(command.name).set(msg.author.id, {
     expiresAt: Date.now() + cooldownTimeInMS,
   });
   console.log(cooldowns.get(msg.author.id));
@@ -44,7 +45,7 @@ module.exports = {
     if (cooldownItem) {
       if (Date.now() < cooldownItem.expiresAt) {
         return msg.channel.send(
-          new Discord.MessageEmbed()
+          new MessageEmbed()
             .setColor(config.colors.error)
             .setTitle("Woah there! Slow down a little.")
             .setDescription(
