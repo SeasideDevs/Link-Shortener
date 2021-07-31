@@ -16,6 +16,7 @@ const bot = new Discord.Client({
     intents: ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES"],
   },
 });
+bot.log = log;
 
 // TODO: Debug logging is on the config parser file not here
 const { parseConfig } = require("./functions/config");
@@ -38,15 +39,15 @@ commandFiles.forEach((commandFile) => {
 });
 
 bot.on("ready", async () => {
-  log(`Logged in as ${bot.user.tag}`, "success");
+  bot.log(`Logged in as ${bot.user.tag}`, "success");
 });
 
 bot.on("guildCreate", async (guild) => {
-  log(`Joined ${guild.name} (${guild.id})`, "join");
+  bot.log(`Joined ${guild.name} (${guild.id})`, "join");
 });
 
 bot.on("guildDelete", async (guild) => {
-  log(`Left ${guild.name} (${guild.id})`, "leave");
+  bot.log(`Left ${guild.name} (${guild.id})`, "leave");
 });
 
 bot.on("message", async (msg) => {
