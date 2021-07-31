@@ -87,7 +87,7 @@ bot.on("message", async (msg) => {
     );
   }
   const command = commands.get(commandName);
-  if (!command) {
+  if (!command && config.general.show_command_not_found) {
     msg.react(config.emojis.error);
     return (errorMsg = await msg.channel.send(
       new Discord.MessageEmbed()
@@ -117,9 +117,9 @@ bot.on("message", async (msg) => {
   }
   const cooldownItem = cooldowns.get(commandName).get(msg.author.id);
   const { check } = require("./functions/cooldown");
-  check(cooldownItem, cooldowns, command, msg);
-
-  command.run(msg, bot, Discord, config, args, log);
+  let checkResult = await check(cooldownItem, cooldowns, command, msg);
+  if (checkResult) return;
+  command.run(msg, bot, Discord, config);
 });
 
 bot.login();

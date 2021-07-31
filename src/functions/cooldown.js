@@ -14,25 +14,9 @@ const set = async (cooldowns, command, msg) => {
   ) {
     cooldownType = "reduced";
   }
-  if (command.cooldowns[cooldownType].endsWith("d")) {
-    const days = command.cooldowns[cooldownType].replace("d", "");
-    cooldownTimeInMS = days * 24 * 60 * 60 * 1000;
-  } else if (command.cooldowns[cooldownType].endsWith("h")) {
-    const hours = command.cooldowns[cooldownType].replace("h", "");
-    cooldownTimeInMS = hours * 60 * 60 * 1000;
-  } else if (command.cooldowns[cooldownType].endsWith("m")) {
-    const minutes = command.cooldowns[cooldownType].replace("m", "");
-    cooldownTimeInMS = minutes * 60 * 1000;
-  } else if (command.cooldowns[cooldownType].endsWith("s")) {
-    const seconds = command.cooldowns[cooldownType].replace("s", "");
-    cooldownTimeInMS = seconds * 1000;
-  } else if (command.cooldowns[cooldownType].endsWith("ms")) {
-    const milliseconds = command.cooldowns[cooldownType].replace("ms", "");
-    cooldownTimeInMS = milliseconds;
-  } else {
-    // If it doesn't end with either of the above letters then just default to seconds
-    cooldownTimeInMS = command.cooldowns[cooldownType] * 1000;
-  }
+
+  // If it doesn't end with either of the above letters then just default to seconds
+  cooldownTimeInMS = command.cooldowns[cooldownType] * 1000;
 
   cooldowns.get(command.name).set(msg.author.id, {
     expiresAt: Date.now() + cooldownTimeInMS,
@@ -46,14 +30,15 @@ module.exports = {
         await msg.channel.send(
           new MessageEmbed()
             .setColor(config.colors.error)
-            .setTitle("Woah there! Slow down a little.")
+            .setTitle("Slow down there!")
             .setDescription(
-              `You can run this command again in **${Math.round(
+              `You can use this command again in **${
                 cooldownItem.expiresAt - Date.now() / 1000
-              )}** seconds!`
+              }** seconds!`
             )
         );
-      }
+        return true;
+      } else cooldowns.get(command.name).delete(msg.author.id);
     }
 
     // If there isn't any cooldown yet then make one and let the user run the command.

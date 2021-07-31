@@ -58,3 +58,6 @@ shard_success = false
 shard_info = false
 shard_warning = false
 shard_error = false
+
+[miscellaneous]
+show_command_not_found = true
