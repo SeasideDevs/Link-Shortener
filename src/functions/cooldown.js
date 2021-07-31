@@ -37,7 +37,6 @@ const set = async (cooldowns, command, msg) => {
   cooldowns.get(command.name).set(msg.author.id, {
     expiresAt: Date.now() + cooldownTimeInMS,
   });
-  console.log(cooldowns.get(msg.author.id));
 };
 module.exports = {
   async check(cooldownItem, cooldowns, command, msg) {
