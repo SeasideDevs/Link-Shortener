@@ -12,7 +12,18 @@ const set = async (cooldowns, command, msg) => {
       .concat(command.access.nonOwnerAccessIDS)
       .includes(msg.author.id)
   ) {
-    cooldownType = "reduced";
+    if (config.owner.reduce_cooldowns) {
+      if (!config.owner.reduce_cooldowns_blacklist.includes(msg.author.id)) {
+        cooldownType = "reduced";
+      }
+    }
+    if (config.owner.bypass_cooldowns) {
+      if (!config.owner.bypass_cooldowns_blacklist.includes(msg.author.id)) {
+        return cooldowns.get(command.name).set(msg.author.id, {
+          expiresAt: Date.now(),
+        });
+      }
+    }
   }
 
   // If it doesn't end with either of the above letters then just default to seconds
