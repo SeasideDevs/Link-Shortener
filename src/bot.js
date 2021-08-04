@@ -22,20 +22,22 @@ bot.log = log;
 const { parseConfig } = require("./functions/config");
 const config = parseConfig();
 
-// Read all files in the commands directory and filter out ones that don't end in .js
-const commandFiles = readdirSync(__dirname + "/commands").filter((file) =>
+// Read all files in the bot.commands directory and filter out ones that don't end in .js
+const commandFiles = readdirSync(__dirname + "/bot.commands").filter((file) =>
   file.endsWith(".js")
 );
 
-// Create the collections where commands and cooldowns go
-const commands = new Discord.Collection();
-const cooldowns = new Discord.Collection();
+// Create the collections where bot.commands and cooldowns go
+bot.commands = new Discord.Collection();
+bot.cooldowns = new Discord.Collection();
+bot.commandCache = new Discord.Collection();
 // Require each command and add it to the both collections
 commandFiles.forEach((commandFile) => {
-  const command = require(`./commands/${commandFile.replace(".js", "")}`);
-  // Add the command to the commands and cooldowns collection
-  commands.set(command.name, command);
-  cooldowns.set(command.name, new Discord.Collection());
+  const command = require(`./bot.commands/${commandFile.replace(".js", "")}`);
+  // Add the command to the bot.commands and cooldowns collection
+  bot.commands.set(command.name, command);
+  bot.cooldowns.set(command.name, new Discord.Collection());
+  bot.commandCache.set(command.name, new Discord.Collection());
 });
 
 bot.on("ready", async () => {
@@ -84,7 +86,7 @@ bot.on("message", async (msg) => {
             bot.user.username
           }**! I respond to ${generateHumanReadableList()}${
             config.prefix.mention_prefix ? " and by mentioning me!" : "!"
-          } To view my commands you can run my help command using ${
+          } To view my bot.commands you can run my help command using ${
             config.prefix.mention_prefix
               ? `**<@!${bot.user.id}>help**`
               : `**${config.prefix.list[0]}help**`
@@ -129,11 +131,11 @@ bot.on("message", async (msg) => {
         .setColor(config.colors.error)
         .setTitle("You didn't provide a command!")
         .setDescription(
-          `You didn't a provide a command to run! To see a list of available commands run **${prefix}help**`
+          `You didn't a provide a command to run! To see a list of available bot.commands run **${prefix}help**`
         )
     );
   }
-  const command = commands.get(commandName);
+  const command = bot.commands.get(commandName);
   if (!command && config.miscellaneous.show_command_not_found) {
     msg.react(config.emojis.error);
     return (errorMsg = await msg.channel.send(
