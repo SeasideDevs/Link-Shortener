@@ -63,6 +63,12 @@ bot.on("message", async (msg) => {
       prefix = listedPrefix;
     }
   });
+  if (
+    msg.content.startsWith(`<@!${bot.user.id}>`) &&
+    config.prefixes.mention_prefix
+  ) {
+    prefix = `<@!${bot.user.id}>`;
+  }
   if (!prefix) return;
   /* 
     Get the msg content with the prefix cut off.
