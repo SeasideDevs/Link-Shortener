@@ -32,18 +32,21 @@ const set = async (cooldowns, command, msg) => {
   });
 };
 module.exports = {
-  async check(cooldownItem, cooldowns, command, msg) {
+  async check(cooldowns, command, msg) {
+    const cooldownItem = cooldowns.get(command.name).get(msg.author.id);
     // Run this is there is a cooldown in the collection
     if (cooldownItem) {
       if (Date.now() < cooldownItem.expiresAt) {
+        const timeLeftInMS = cooldownItem.expiresAt - Date.now();
+        const timeLeftInSeconds = Math.round(timeLeftInMS / 1000);
         await msg.channel.send(
           new MessageEmbed()
             .setColor(config.colors.error)
             .setTitle("Slow down there!")
             .setDescription(
-              `You can use this command again in **${
-                cooldownItem.expiresAt - Date.now() / 1000
-              }** seconds!`
+              `You can use this command again in **${timeLeftInSeconds}** ${
+                timeLeftInSeconds === 1 ? "second" : "seconds"
+              }!`
             )
         );
         return true;

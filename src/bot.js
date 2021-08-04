@@ -122,9 +122,9 @@ bot.on("message", async (msg) => {
       );
     }
   }
-  const cooldownItem = cooldowns.get(commandName).get(msg.author.id);
+
   const { check } = require("./functions/cooldown");
-  let checkResult = await check(cooldownItem, cooldowns, command, msg);
+  let checkResult = await check(cooldowns, command, msg);
   if (checkResult) return;
   command.run(msg, bot, Discord, config);
 });
