@@ -1,6 +1,6 @@
 module.exports = {
   name: "shorten",
-  aliases: ["cut"],
+  aliases: ["is.gd"],
   access: {
     ownerOnly: false,
     nonOwnerAccessIDS: [],
