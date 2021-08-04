@@ -5,7 +5,7 @@ reduce_cooldowns_blacklist = []
 bypass_cooldowns = false 
 bypass_cooldowns_blacklist = [] 
 
-[prefixes]
+[prefix]
 list = [] 
 mention_prefix = true 
 
