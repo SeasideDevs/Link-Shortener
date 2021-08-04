@@ -11,7 +11,6 @@ module.exports = {
       "info",
       "warning",
       "error",
-      "debug",
       "shard_success",
       "shard_info",
       "shard_warning",

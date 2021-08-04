@@ -1,4 +1,3 @@
-const { log } = require("./logger");
 const { MessageEmbed } = require("discord.js");
 const { parseConfig } = require("./config");
 const config = parseConfig();
