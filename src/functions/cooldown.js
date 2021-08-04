@@ -3,7 +3,6 @@ const { MessageEmbed } = require("discord.js");
 const { parseConfig } = require("./config");
 const config = parseConfig();
 
-// TODO: Reduce vs Bypass cooldown modes
 const set = async (cooldowns, command, msg) => {
   let cooldownTimeInMS;
   let cooldownType = "normal";
