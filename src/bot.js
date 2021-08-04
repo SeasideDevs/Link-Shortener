@@ -115,10 +115,8 @@ bot.on("message", async (msg) => {
       return msg.channel.send(
         new Discord.MessageEmbed()
           .setColor(config.colors.error)
-          .setTitle("This command is owner only")
-          .setDescription(
-            "This command is restricted to the owners of the bot!"
-          )
+          .setTitle("You can't use this comand!")
+          .setDescription("Only authorized users have access to this command.")
       );
     }
   }
