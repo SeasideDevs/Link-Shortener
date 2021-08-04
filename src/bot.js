@@ -52,13 +52,53 @@ bot.on("guildDelete", async (guild) => {
 
 bot.on("message", async (msg) => {
   if (msg.author.bot) return;
+  if (msg.content === `<@!${bot.user.id}>`) {
+    const generateHumanReadableList = () => {
+      // Just aliasing it for now
+      const prefixes = config.prefix.list;
+      if (prefixes.length === 1) {
+        return `**${prefixes[0]}**`;
+      }
+      if (prefixes.length === 2) {
+        const boldPrefixes = [];
+        prefixes.forEach((prefix) => {
+          boldPrefixes.push(`**${prefix}**`);
+        });
+        return boldPrefixes.join(" and ");
+      }
+      if (prefixes.length > 2) {
+        const lastPrefix = `**${prefixes.pop()}**`;
+        const boldPrefixes = [];
+        prefixes.forEach((prefix) => {
+          boldPrefixes.push(`**${prefix}**`);
+        });
+        return `${boldPrefixes.join(", ")}, and ${lastPrefix}`;
+      }
+    };
+    return msg.channel.send(
+      new Discord.MessageEmbed()
+        .setColor(config.colors.main)
+        .setTitle("👋 Howdy!")
+        .setDescription(
+          `I'm **${
+            bot.user.username
+          }**! I respond to ${generateHumanReadableList()}${
+            config.prefix.mention_prefix ? " and by mentioning me!" : "!"
+          } To view my commands you can run my help command using ${
+            config.prefix.mention_prefix
+              ? `**<@!${bot.user.id}>help**`
+              : `**${config.prefix.list[0]}help**`
+          }`
+        )
+    );
+  }
   let prefix;
   /*
     Go through each prefix and check if the msg starts with one of them.
     If one does the set the prefix variable to that.
     If no valid prefix was used then the variable stays undefined and we return
   */
-  config.prefixes.list.forEach((listedPrefix) => {
+  config.prefix.list.forEach((listedPrefix) => {
     if (msg.content.startsWith(listedPrefix)) {
       prefix = listedPrefix;
     }
