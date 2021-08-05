@@ -19,6 +19,19 @@ module.exports = {
         .setTitle("Generating Link")
         .setDescription("Please wait while I create your link!")
     );
+    /*
+      Check the cache to see if it contains the link the user wants to shorten.
+      If so send that instead of sending a new request
+    */
+    if (bot.cache.get(this.name).get(args[0])) {
+      return message.edit(
+        new discord.MessageEmbed()
+          .setColor(config.colors.main)
+          .setTitle("Here's your link!")
+          .setDescription(`${config.emojis.success} ${url}`)
+          .setFooter("This response is cached lol")
+      );
+    }
     const fetch = require("node-fetch");
     const errors = [
       {
