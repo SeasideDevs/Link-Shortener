@@ -23,7 +23,7 @@ const { parseConfig } = require("./functions/config");
 const config = parseConfig();
 
 // Read all files in the bot.commands directory and filter out ones that don't end in .js
-const commandFiles = readdirSync(__dirname + "/bot.commands").filter((file) =>
+const commandFiles = readdirSync(__dirname + "/commands").filter((file) =>
   file.endsWith(".js")
 );
 
@@ -33,7 +33,7 @@ bot.cooldowns = new Discord.Collection();
 bot.cache = new Discord.Collection();
 // Require each command and add it to the both collections
 commandFiles.forEach((commandFile) => {
-  const command = require(`./bot.commands/${commandFile.replace(".js", "")}`);
+  const command = require(`./commands/${commandFile.replace(".js", "")}`);
   // Add the command to the bot.commands and cooldowns collection
   bot.commands.set(command.name, command);
   bot.cooldowns.set(command.name, new Discord.Collection());
