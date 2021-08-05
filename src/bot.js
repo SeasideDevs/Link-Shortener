@@ -37,7 +37,9 @@ commandFiles.forEach((commandFile) => {
   // Add the command to the bot.commands and cooldowns collection
   bot.commands.set(command.name, command);
   bot.cooldowns.set(command.name, new Discord.Collection());
-  bot.commandCache.set(command.name, new Discord.Collection());
+  if (command.cacheRequired) {
+    bot.commandCache.set(command.name, new Discord.Collection());
+  }
 });
 
 bot.on("ready", async () => {

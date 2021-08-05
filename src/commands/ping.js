@@ -1,6 +1,7 @@
 module.exports = {
   name: "ping",
   aliases: ["latency"],
+  cacheRequired: false,
   access: {
     ownerOnly: false,
     nonOwnerAccessIDS: [],

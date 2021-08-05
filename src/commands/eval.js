@@ -1,6 +1,7 @@
 module.exports = {
   name: "eval",
   aliases: ["e"],
+  cacheRequired: false,
   access: {
     ownerOnly: true,
     nonOwnerAccessIDS: [],

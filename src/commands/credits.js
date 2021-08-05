@@ -1,6 +1,7 @@
 module.exports = {
   name: "credits",
   aliases: ["credit"],
+  cacheRequired: false,
   access: {
     ownerOnly: false,
     nonOwnerAccessIDS: [],
