@@ -28,8 +28,9 @@ module.exports = {
         new discord.MessageEmbed()
           .setColor(config.colors.main)
           .setTitle("Here's your link!")
-          .setDescription(`${config.emojis.success} ${url}`)
-          .setFooter("This response is cached lol")
+          .setDescription(
+            `${config.emojis.success} ${bot.cache.get(this.name).get(args[0])}`
+          )
       );
     }
     const fetch = require("node-fetch");
@@ -79,6 +80,7 @@ module.exports = {
       );
     }
     const url = await res.text();
+    bot.cache.get(this.name).set(args[0], url);
     message.edit(
       new discord.MessageEmbed()
         .setColor(config.colors.main)
