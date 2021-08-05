@@ -166,7 +166,7 @@ bot.on("message", async (msg) => {
   }
 
   const { check } = require("./functions/cooldown");
-  let checkResult = await check(cooldowns, command, msg);
+  let checkResult = await check(bot.cooldowns, command, msg);
   if (checkResult) return;
   command.run(msg, bot, Discord, config, args);
 });
