@@ -30,7 +30,7 @@ const commandFiles = readdirSync(__dirname + "/bot.commands").filter((file) =>
 // Create the collections where bot.commands and cooldowns go
 bot.commands = new Discord.Collection();
 bot.cooldowns = new Discord.Collection();
-bot.commandCache = new Discord.Collection();
+bot.cache = new Discord.Collection();
 // Require each command and add it to the both collections
 commandFiles.forEach((commandFile) => {
   const command = require(`./bot.commands/${commandFile.replace(".js", "")}`);
@@ -38,7 +38,7 @@ commandFiles.forEach((commandFile) => {
   bot.commands.set(command.name, command);
   bot.cooldowns.set(command.name, new Discord.Collection());
   if (command.cacheRequired) {
-    bot.commandCache.set(command.name, new Discord.Collection());
+    bot.cache.set(command.name, new Discord.Collection());
   }
 });
 
