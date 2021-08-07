@@ -77,7 +77,7 @@ bot.on("messageCreate", async (msg) => {
         return `${boldPrefixes.join(", ")}, and ${lastPrefix}`;
       }
     };
-    return msg.channel.send({
+    return msg.reply({
       embeds: [
         new Discord.MessageEmbed()
           .setColor(config.colors.main)
@@ -128,7 +128,7 @@ bot.on("messageCreate", async (msg) => {
     If the command isn't a valid one then error
   */
   if (commandName === "") {
-    return msg.channel.send({
+    return msg.reply({
       embeds: [
         new Discord.MessageEmbed()
           .setColor(config.colors.error)
@@ -143,7 +143,7 @@ bot.on("messageCreate", async (msg) => {
   if (!command && config.miscellaneous.show_command_not_found) {
     msg.react(config.emojis.error);
     const { Util } = require("discord.js");
-    return await msg.channel.send({
+    return await msg.reply({
       embeds: [
         new Discord.MessageEmbed()
           .setColor(config.colors.error)
@@ -164,7 +164,7 @@ bot.on("messageCreate", async (msg) => {
         .concat(command.access.nonOwnerAccessIDS)
         .includes(msg.author.id)
     ) {
-      return msg.channel.send({
+      return msg.reply({
         embeds: [
           new Discord.MessageEmbed()
             .setColor(config.colors.error)

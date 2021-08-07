@@ -13,7 +13,7 @@ module.exports = {
     reduced: "6",
   },
   async run(msg, bot, discord, config, args) {
-    const message = await msg.channel.send({
+    const message = await msg.reply({
       embeds: [
         new discord.MessageEmbed()
           .setColor(config.colors.main)

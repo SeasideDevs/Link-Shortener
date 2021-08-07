@@ -13,7 +13,7 @@ module.exports = {
     reduced: "0.5",
   },
   async run(msg, bot, discord, config, args) {
-    msg.channel.send({
+    msg.reply({
       embeds: [
         new discord.MessageEmbed()
           .setColor(config.colors.main)

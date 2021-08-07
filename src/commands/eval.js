@@ -18,7 +18,7 @@ module.exports = {
     try {
       await eval(args.join(" "));
     } catch (error) {
-      return msg.channel.send({
+      return msg.reply({
         embeds: [
           new discord.MessageEmbed()
             .setColor(config.colors.error)
@@ -30,7 +30,7 @@ module.exports = {
       });
     }
 
-    msg.channel.send({
+    msg.reply({
       embeds: [
         new discord.MessageEmbed()
           .setColor(config.colors.main)

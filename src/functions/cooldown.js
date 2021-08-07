@@ -39,7 +39,7 @@ module.exports = {
       if (Date.now() < cooldownItem.expiresAt) {
         const timeLeftInMS = cooldownItem.expiresAt - Date.now();
         const timeLeftInSeconds = Math.round(timeLeftInMS / 1000);
-        await msg.channel.send({
+        await msg.reply({
           embeds: [
             new MessageEmbed()
               .setColor(config.colors.error)

@@ -14,7 +14,7 @@ module.exports = {
   },
   async run(msg, bot, discord, config, args) {
     // Send the embed
-    const message = await msg.channel.send({
+    const message = await msg.reply({
       embeds: [
         new discord.MessageEmbed()
           .setColor(config.colors.main)
