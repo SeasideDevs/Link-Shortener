@@ -4,6 +4,7 @@ const { readdirSync } = require("fs");
 const bot = new Discord.Client({
   allowedMentions: {
     parse: ["users"],
+    repliedUser: false,
   },
   presence: {
     activity: {
