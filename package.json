@@ -12,7 +12,7 @@
     "@iarna/toml": "^3.0.0",
     "bufferutil": "^4.0.3",
     "chalk": "^4.1.1",
-    "discord.js": "^12.5.3",
+    "discord.js": "^13.0.0",
     "dotenv": "^10.0.0",
     "enquirer": "^2.3.6",
     "node-fetch": "^2.6.1",
