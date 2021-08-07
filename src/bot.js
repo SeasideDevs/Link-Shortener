@@ -7,10 +7,12 @@ const bot = new Discord.Client({
     repliedUser: false,
   },
   presence: {
-    activity: {
-      name: "shortening links!",
-      type: "COMPETING",
-    },
+    activities: [
+      {
+        name: "shortening links!",
+        type: "COMPETING",
+      },
+    ],
   },
   intents: ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES"],
 });
