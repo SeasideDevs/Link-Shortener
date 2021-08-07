@@ -13,6 +13,28 @@ module.exports = {
     reduced: "0.5",
   },
   async run(msg, bot, discord, config, args) {
-    console.log("evel");
+    const startDate = await Date.now();
+    let results;
+    try {
+      await eval(args.join(" "));
+    } catch (error) {
+      return msg.channel.send(
+        new discord.MessageEmbed()
+          .setColor(config.colors.error)
+          .setTitle("Eval")
+          .addField("📤 Code", "```javascript\n" + args.join(" ") + "\n```")
+          .addField("📥 Result", "```javascript\n" + error.stack + "\n```")
+          .setFooter(`Finished in ${Date.now() - startDate}ms`)
+      );
+    }
+
+    msg.channel.send(
+      new discord.MessageEmbed()
+        .setColor(config.colors.main)
+        .setTitle("Eval")
+        .addField("📤 Code", "```javascript\n" + args.join(" ") + "\n```")
+        .addField("📥 Result", "```javascript\n" + results + "\n```")
+        .setFooter(`Finished in ${Date.now() - startDate}ms`)
+    );
   },
 };
