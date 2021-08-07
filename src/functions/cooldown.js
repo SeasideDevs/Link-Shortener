@@ -39,16 +39,21 @@ module.exports = {
       if (Date.now() < cooldownItem.expiresAt) {
         const timeLeftInMS = cooldownItem.expiresAt - Date.now();
         const timeLeftInSeconds = Math.round(timeLeftInMS / 1000);
-        await msg.channel.send(
-          new MessageEmbed()
-            .setColor(config.colors.error)
-            .setTitle("Slow down there!")
-            .setDescription(
-              `You can use this command again in **${timeLeftInSeconds}** ${
-                timeLeftInSeconds === 1 ? "second" : "seconds"
-              }!`
-            )
-        );
+        await msg.reply({
+          embeds: [
+            new MessageEmbed()
+              .setColor(config.colors.error)
+              .setTitle("Slow down there!")
+              .setDescription(
+                `You can use this command again in **${timeLeftInSeconds}** ${
+                  timeLeftInSeconds === 1 ? "second" : "seconds"
+                }!`
+              ),
+          ],
+          allowedMentions: {
+            repliedUser: true,
+          },
+        });
         return true;
       } else cooldowns.get(command.name).delete(msg.author.id);
     }
