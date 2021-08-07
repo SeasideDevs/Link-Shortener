@@ -137,6 +137,9 @@ bot.on("messageCreate", async (msg) => {
             `You didn't a provide a command to run! To see a list of available bot.commands run **${prefix}help**`
           ),
       ],
+      allowedMentions: {
+        repliedUser: true,
+      },
     });
   }
   const command = bot.commands.get(commandName);
@@ -155,6 +158,9 @@ bot.on("messageCreate", async (msg) => {
             )
           ),
       ],
+      allowedMentions: {
+        repliedUser: true,
+      },
     });
   }
   // Check if the user is allowed to use a owner only command
@@ -173,6 +179,9 @@ bot.on("messageCreate", async (msg) => {
               "Only authorized users have access to this command."
             ),
         ],
+        allowedMentions: {
+          repliedUser: true,
+        },
       });
     }
   }

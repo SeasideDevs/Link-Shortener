@@ -50,6 +50,9 @@ module.exports = {
                 }!`
               ),
           ],
+          allowedMentions: {
+            repliedUser: true,
+          },
         });
         return true;
       } else cooldowns.get(command.name).delete(msg.author.id);
