@@ -52,7 +52,7 @@ bot.on("guildDelete", async (guild) => {
   bot.log(`Left ${guild.name} (${guild.id})`, "leave");
 });
 
-bot.on("message", async (msg) => {
+bot.on("messageCreate", async (msg) => {
   if (msg.author.bot) return;
   if (msg.content === `<@!${bot.user.id}>`) {
     const generateHumanReadableList = () => {
