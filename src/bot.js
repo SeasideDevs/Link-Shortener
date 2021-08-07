@@ -2,7 +2,6 @@ const Discord = require("discord.js");
 const { log } = require("./functions/logger");
 const { readdirSync } = require("fs");
 const bot = new Discord.Client({
-  disableMentions: "all",
   allowedMentions: {
     parse: ["users"],
   },
