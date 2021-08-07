@@ -12,9 +12,7 @@ const bot = new Discord.Client({
       type: "COMPETING",
     },
   },
-  ws: {
-    intents: ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES"],
-  },
+  intents: ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES"],
 });
 bot.log = log;
 
