@@ -144,9 +144,8 @@ bot.on("messageCreate", async (msg) => {
   }
   const command = bot.commands.get(commandName);
   if (!command && config.miscellaneous.show_command_not_found) {
-    msg.react(config.emojis.error);
     const { Util } = require("discord.js");
-    return await msg.reply({
+    const message = await msg.reply({
       embeds: [
         new Discord.MessageEmbed()
           .setColor(config.colors.error)
@@ -162,6 +161,7 @@ bot.on("messageCreate", async (msg) => {
         repliedUser: true,
       },
     });
+    return message.react(config.emojis.error);
   }
   // Check if the user is allowed to use a owner only command
   if (command.access.ownerOnly) {
