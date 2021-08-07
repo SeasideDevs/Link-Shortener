@@ -142,13 +142,17 @@ bot.on("messageCreate", async (msg) => {
   const command = bot.commands.get(commandName);
   if (!command && config.miscellaneous.show_command_not_found) {
     msg.react(config.emojis.error);
+    const { Util } = require("discord.js");
     return await msg.channel.send({
       embeds: [
         new Discord.MessageEmbed()
           .setColor(config.colors.error)
           .setTitle("Command not found!")
           .setDescription(
-            `The command **${commandName}** doesn't exist! Make sure you didn't mispell it.`
+            Util.cleanContent(
+              `The command **${commandName}** doesn't exist! Make sure you didn't mispell it.`,
+              msg.channel
+            )
           ),
       ],
     });
