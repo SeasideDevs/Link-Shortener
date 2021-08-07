@@ -128,7 +128,7 @@ bot.on("messageCreate", async (msg) => {
     If the command isn't a valid one then error
   */
   if (commandName === "") {
-    return msg.reply({
+    const message = await msg.reply({
       embeds: [
         new Discord.MessageEmbed()
           .setColor(config.colors.error)
@@ -141,6 +141,7 @@ bot.on("messageCreate", async (msg) => {
         repliedUser: true,
       },
     });
+    return message.react(config.emojis.error);
   }
   const command = bot.commands.get(commandName);
   if (!command && config.miscellaneous.show_command_not_found) {
