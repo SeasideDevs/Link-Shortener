@@ -13,25 +13,31 @@ module.exports = {
     reduced: "6",
   },
   async run(msg, bot, discord, config, args) {
-    const message = await msg.channel.send(
-      new discord.MessageEmbed()
-        .setColor(config.colors.main)
-        .setTitle("Generating Link")
-        .setDescription("Please wait while I create your link!")
-    );
+    const message = await msg.channel.send({
+      embeds: [
+        new discord.MessageEmbed()
+          .setColor(config.colors.main)
+          .setTitle("Generating Link")
+          .setDescription("Please wait while I create your link!"),
+      ],
+    });
     /*
       Check the cache to see if it contains the link the user wants to shorten.
       If so send that instead of sending a new request
     */
     if (bot.cache.get(this.name).get(args[0])) {
-      return message.edit(
-        new discord.MessageEmbed()
-          .setColor(config.colors.main)
-          .setTitle("Here's your link!")
-          .setDescription(
-            `${config.emojis.success} ${bot.cache.get(this.name).get(args[0])}`
-          )
-      );
+      return message.edit({
+        embeds: [
+          new discord.MessageEmbed()
+            .setColor(config.colors.main)
+            .setTitle("Here's your link!")
+            .setDescription(
+              `${config.emojis.success} ${bot.cache
+                .get(this.name)
+                .get(args[0])}`
+            ),
+        ],
+      });
     }
     const fetch = require("node-fetch");
     const errors = [
@@ -61,31 +67,36 @@ module.exports = {
       const apiErrors = await errors.map((error) => error.apiProvided);
       const errorIndex = apiErrors.indexOf(text);
       if (errorIndex > -1) {
-        return message.edit(
-          new discord.MessageEmbed()
-            .setColor(config.colors.error)
-            .setTitle(errors[errorIndex].humanReadableTitle)
-            .setDescription(errors[errorIndex].humanReadableDescription)
-        );
-        `     `;
+        return message.edit({
+          embeds: [
+            new discord.MessageEmbed()
+              .setColor(config.colors.error)
+              .setTitle(errors[errorIndex].humanReadableTitle)
+              .setDescription(errors[errorIndex].humanReadableDescription),
+          ],
+        });
       }
       bot.log("An error occured while trying to shorten a link", "error");
-      return message.edit(
-        new discord.MessageEmbed()
-          .setColor(config.colors.error)
-          .setTitle("An error ocurred!")
-          .setDescription(
-            `${config.emojis.error} An unknown error occured! The developers have already been notified! If this keeps happening join the [support server](https://is.gd/rickroll)!`
-          )
-      );
+      return message.edit({
+        embeds: [
+          new discord.MessageEmbed()
+            .setColor(config.colors.error)
+            .setTitle("An error ocurred!")
+            .setDescription(
+              `${config.emojis.error} An unknown error occured! The developers have already been notified! If this keeps happening join the [support server](https://is.gd/rickroll)!`
+            ),
+        ],
+      });
     }
     const url = await res.text();
     bot.cache.get(this.name).set(args[0], url);
-    message.edit(
-      new discord.MessageEmbed()
-        .setColor(config.colors.main)
-        .setTitle("Here's your link!")
-        .setDescription(`${config.emojis.success} ${url}`)
-    );
+    message.edit({
+      embeds: [
+        new discord.MessageEmbed()
+          .setColor(config.colors.main)
+          .setTitle("Here's your link!")
+          .setDescription(`${config.emojis.success} ${url}`),
+      ],
+    });
   },
 };

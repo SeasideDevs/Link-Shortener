@@ -77,22 +77,24 @@ bot.on("messageCreate", async (msg) => {
         return `${boldPrefixes.join(", ")}, and ${lastPrefix}`;
       }
     };
-    return msg.channel.send(
-      new Discord.MessageEmbed()
-        .setColor(config.colors.main)
-        .setTitle("👋 Howdy!")
-        .setDescription(
-          `I'm **${
-            bot.user.username
-          }**! I respond to ${generateHumanReadableList()}${
-            config.prefix.mention_prefix ? " and by mentioning me!" : "!"
-          } To view my bot.commands you can run my help command using ${
-            config.prefix.mention_prefix
-              ? `**<@!${bot.user.id}>help**`
-              : `**${config.prefix.list[0]}help**`
-          }`
-        )
-    );
+    return msg.channel.send({
+      embeds: [
+        new Discord.MessageEmbed()
+          .setColor(config.colors.main)
+          .setTitle("👋 Howdy!")
+          .setDescription(
+            `I'm **${
+              bot.user.username
+            }**! I respond to ${generateHumanReadableList()}${
+              config.prefix.mention_prefix ? " and by mentioning me!" : "!"
+            } To view my bot.commands you can run my help command using ${
+              config.prefix.mention_prefix
+                ? `**<@!${bot.user.id}>help**`
+                : `**${config.prefix.list[0]}help**`
+            }`
+          ),
+      ],
+    });
   }
   let prefix;
   /*
@@ -126,26 +128,30 @@ bot.on("messageCreate", async (msg) => {
     If the command isn't a valid one then error
   */
   if (commandName === "") {
-    return msg.channel.send(
-      new Discord.MessageEmbed()
-        .setColor(config.colors.error)
-        .setTitle("You didn't provide a command!")
-        .setDescription(
-          `You didn't a provide a command to run! To see a list of available bot.commands run **${prefix}help**`
-        )
-    );
+    return msg.channel.send({
+      embeds: [
+        new Discord.MessageEmbed()
+          .setColor(config.colors.error)
+          .setTitle("You didn't provide a command!")
+          .setDescription(
+            `You didn't a provide a command to run! To see a list of available bot.commands run **${prefix}help**`
+          ),
+      ],
+    });
   }
   const command = bot.commands.get(commandName);
   if (!command && config.miscellaneous.show_command_not_found) {
     msg.react(config.emojis.error);
-    return (errorMsg = await msg.channel.send(
-      new Discord.MessageEmbed()
-        .setColor(config.colors.error)
-        .setTitle("Command not found!")
-        .setDescription(
-          `The command **${commandName}** doesn't exist! Make sure you didn't mispell it.`
-        )
-    ));
+    return await msg.channel.send({
+      embeds: [
+        new Discord.MessageEmbed()
+          .setColor(config.colors.error)
+          .setTitle("Command not found!")
+          .setDescription(
+            `The command **${commandName}** doesn't exist! Make sure you didn't mispell it.`
+          ),
+      ],
+    });
   }
   // Check if the user is allowed to use a owner only command
   if (command.access.ownerOnly) {
@@ -154,12 +160,16 @@ bot.on("messageCreate", async (msg) => {
         .concat(command.access.nonOwnerAccessIDS)
         .includes(msg.author.id)
     ) {
-      return msg.channel.send(
-        new Discord.MessageEmbed()
-          .setColor(config.colors.error)
-          .setTitle("You can't use this comand!")
-          .setDescription("Only authorized users have access to this command.")
-      );
+      return msg.channel.send({
+        embeds: [
+          new Discord.MessageEmbed()
+            .setColor(config.colors.error)
+            .setTitle("You can't use this comand!")
+            .setDescription(
+              "Only authorized users have access to this command."
+            ),
+        ],
+      });
     }
   }
 
